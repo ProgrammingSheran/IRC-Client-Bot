@@ -115,6 +115,11 @@ class MainIRC(QThread):
     part_leave_emitter = pyqtSignal(str)
     topic_emitter = pyqtSignal(str)
     whois_emitter = pyqtSignal(str)
+    message_entry = pyqtSignal(str)
+    my_host = pyqtSignal(str)
+    server_created = pyqtSignal(str)
+    my_info = pyqtSignal(str)
+    channel_user = pyqtSignal(str)
 
     joined = pyqtSignal(str)
     quitted = pyqtSignal(str)
@@ -368,6 +373,21 @@ class MainIRC(QThread):
 
             elif self.msg[1] == "TOPIC":
                 self.topic_emitter.emit(self.person + " --> SET THE TOPIC TO: %s" % self.new_topic)
+
+            elif self.msg[1] == "001":
+                self.message_entry.emit("MESSAGE: %s" % ' '.join(self.msg[3:]).replace(":", ""))
+
+            elif self.msg[1] == "002":
+                self.my_host.emit("MY-HOST: %s" % ' '.join(self.msg[3:]).replace(":", ""))
+
+            elif self.msg[1] == "003":
+                self.server_created.emit("SERVER-CREATED: %s" % ' '.join(self.msg[3:]).replace(":", ""))
+
+            elif self.msg[1] == "004":
+                self.my_info.emit("MY-INFO: %s" % ' '.join(self.msg[3:]))
+
+            elif self.msg[1] == "353":
+                self.channel_user.emit("User in this channel: %s" % ', '.join(self.msg[5:]).replace(":", ""))
 
             elif self.msg[1] == "311":
                 self.whois_emitter.emit("WHOIS [USER] --> %s (%s)" % (self.msg[3], ' '.join(self.msg[4:])))

@@ -427,6 +427,11 @@ class MainWindow(QMainWindow):
         self.Main_Socket.part_leave_emitter.connect(self.Part)
         self.Main_Socket.topic_emitter.connect(self.Topic)
         self.Main_Socket.whois_emitter.connect(self.Whois)
+        self.Main_Socket.message_entry.connect(self.MSGEntry)
+        self.Main_Socket.my_host.connect(self.MyHost)
+        self.Main_Socket.server_created.connect(self.ServerCreated)
+        self.Main_Socket.my_info.connect(self.MyInfo)
+        self.Main_Socket.channel_user.connect(self.ChannelUser)
         self.Main_Socket.start()
 
 
@@ -732,13 +737,43 @@ class MainWindow(QMainWindow):
         try:
             self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
         except:
-            self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "Topic error!" + "\n")
 
     def Whois(self, value):
         try:
             self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
         except:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "Whois error!" + "\n")
+
+    def MSGEntry(self, value):
+        try:
             self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
+        except:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "Message entry error!" + "\n")
+
+    def MyHost(self, value):
+        try:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
+        except:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "My host error!" + "\n")
+
+    def ServerCreated(self, value):
+        try:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
+        except:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "Server created error!" + "\n")
+
+    def MyInfo(self, value):
+        try:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
+        except:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "My info error!" + "\n")
+
+    def ChannelUser(self, value):
+        try:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
+        except:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "Channel user error!" + "\n")
 
     def ClearMSGFieldFunc(self):
         self.MainMessageField.setText("")
