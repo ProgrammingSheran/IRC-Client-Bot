@@ -432,6 +432,7 @@ class MainWindow(QMainWindow):
         self.Main_Socket.server_created.connect(self.ServerCreated)
         self.Main_Socket.my_info.connect(self.MyInfo)
         self.Main_Socket.channel_user.connect(self.ChannelUser)
+        self.Main_Socket.names_emitter.connect(self.NamesReceived)
         self.Main_Socket.start()
 
 
@@ -644,6 +645,8 @@ class MainWindow(QMainWindow):
             self.Main_Socket.command_line(self.sendMessageField.text())
         elif str(self.sendMessageField.text()).startswith("/topic"):
             self.Main_Socket.command_line(self.sendMessageField.text())
+        elif str(self.sendMessageField.text()).startswith("/names"):
+            self.Main_Socket.command_line(self.sendMessageField.text())
         elif str(self.sendMessageField.text()).startswith("/whois"):
             self.Main_Socket.command_line(self.sendMessageField.text())
         else:
@@ -738,6 +741,12 @@ class MainWindow(QMainWindow):
             self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
         except:
             self.MainMessageField.setText(self.MainMessageField.toPlainText() + "Topic error!" + "\n")
+
+    def NamesReceived(self, value):
+        try:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + str(value) + "\n")
+        except:
+            self.MainMessageField.setText(self.MainMessageField.toPlainText() + "Names error!" + "\n")
 
     def Whois(self, value):
         try:
