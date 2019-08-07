@@ -120,6 +120,7 @@ class MainIRC(QThread):
     server_created = pyqtSignal(str)
     my_info = pyqtSignal(str)
     channel_user = pyqtSignal(str)
+    names_emitter = pyqtSignal(str)
 
     joined = pyqtSignal(str)
     quitted = pyqtSignal(str)
@@ -222,6 +223,13 @@ class MainIRC(QThread):
             except:
                 pass
 
+        elif str(identify) == "/names":
+            try:
+                chann = split[1]
+                self.names(chann)
+            except:
+                pass
+
         elif str(identify) == "/whois":
             try:
                 username = split[1]
@@ -274,6 +282,15 @@ class MainIRC(QThread):
             self.topic_emitter.emit("You changed the topic: %s" % top)
         except:
             self.topic_emitter.emit("Topic error")
+
+    def names(self, channel):
+        chan = bytes(channel, "utf-8")
+        try:
+            chann = chan.decode()
+            self.sock.send(b"NAMES %s\r\n" % chan)
+            self.names_emitter.emit("Requested user of this channel (%s)" % chann)
+        except:
+            self.names_emitter.emit("Names error!")
 
     def whois(self, username):
         use = bytes(username, "utf-8")
@@ -344,7 +361,7 @@ class MainIRC(QThread):
             else:
                 pass
 
-            self.final_message = ' '.join(self.msg[3:]).replace(":", "")
+            self.final_message = ' '.join(self.msg[3:]).replace(":", "", 1)
 
             self.raw_message.emit(self.person + ":" + str(self.final_message))
             self.new_nickname = self.msg[2].replace(":", "")
@@ -410,6 +427,7 @@ class MainIRC(QThread):
 
             elif self.msg[1] == "332":
                 self.topic_emitter.emit("Current Topic --> %s" % self.msg[4].replace(":", ""))
+            
         except:
             pass
 
