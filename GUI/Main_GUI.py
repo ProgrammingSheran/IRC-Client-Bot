@@ -1,5 +1,5 @@
 '''
---- Simon Meins (15) --- © Copyright 2019 | All Rights Reserved! ---
+--- Avocado (15) --- © Copyright 2019 | All Rights Reserved! ---
 
 This file represents the whole GUI (Graphical User Interface) of the
 IRC-Client-Bot-Project. Everything that has to do with design is included
@@ -501,7 +501,7 @@ class MainWindow(QMainWindow):
         self.MainMessageField.setReadOnly(True)
 
         # Line Edit variables
-        presets = ["/msg", "/msg PyroPeter", "/nick", "/nick SIMONINTHEHOUSE", "/join", "/away", "/back", "/part", "/topic", "/whois"]
+        presets = ["/msg", "/msg PyroPeter", "/nick", "/nick SIMONINTHEHOUSE", "/join", "/away", "/back", "/part", "/topic", "/whois", "/names"]
         self.completer = QCompleter(presets)
 
         # Setting up the message field TODO Connecting the function

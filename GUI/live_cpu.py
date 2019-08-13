@@ -1,5 +1,5 @@
 '''
---- Simon Meins (15) --- © Copyright 2019 | All Rights Reserved! ---
+--- Avocado (15) --- © Copyright 2019 | All Rights Reserved! ---
 
 This file represents the CPU state included in the GUI
 This is a live CPU state showing up in the GUI in form of
@@ -35,12 +35,12 @@ class Live_CPU(QThread):
                 # Checking for values and raising errors when needed
                 if int(cpu) < 80:
                     self.warning.emit("CPU:")
-                elif int(cpu) > 80:
+                elif int(cpu) > 80 and int(cpu) < 90:
                     self.warning.emit("CPU WARNING!")
-                elif int(cpu) > 90:
+                elif int(cpu) > 90 and int(cpu) < 95:
                     self.warning.emit("CRITICAL CPU!")
                 elif int(cpu) > 95:
-                    sys.exit()
+                    self.close()
 
                 sleep(1)
             except:

@@ -1,5 +1,5 @@
 '''
---- Simon Meins (15) --- © Copyright 2019 | All Rights Reserved! ---
+--- Avocado (15) --- © Copyright 2019 | All Rights Reserved! ---
 
 This file represents the module state feature.
 The appearing window is showing the state of the analyse modules
