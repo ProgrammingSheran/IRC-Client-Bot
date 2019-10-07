@@ -200,9 +200,7 @@ class AnalyseWindow(QWidget):
         self.button20.move(410, 430)
         self.button20.resize(100, 50)
         self.button21.move(230,500)
-        self.button21.resize(100,50)
-
-        # Button functions TODO Set up the functions
+        self.button21.resize(100, 50)
 
         self.button1.clicked.connect(self.Amazon)
         self.button2.clicked.connect(self.Animals)
@@ -397,8 +395,6 @@ class MainWindow(QMainWindow):
     # By default server is connecting to a test channel (this can be changed within the settings)
     def __init__(self):
         super().__init__()
-        # TODO Creating the SOCKET Thread for connecting to the server and channel
-        # TODO Starting the Thread
 
         # Setting up the CPU Thread
         self.CPUThread = Live_CPU()
